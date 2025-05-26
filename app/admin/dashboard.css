@@ -1,0 +1,263 @@
+:root {
+  /* Couleurs artisanales */
+  --primary: #5D4037; /* Brun profond */
+  --secondary: #8D6E63; /* Brun clair */
+  --accent: #D7CCC8; /* Beige */
+  --light: #EFEBE9; /* Beige très clair */
+  --dark: #3E2723; /* Brun très foncé */
+  --white: #FFFFFF;
+  --black: #212121;
+  
+  /* Typographie */
+  --font-main: 'Poppins', sans-serif;
+  --font-title: 'Georgia', serif;
+  
+  /* Espacements */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  
+  /* Ombres */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.15);
+  --shadow-lg: 0 8px 16px rgba(0,0,0,0.2);
+  
+  /* Bordures */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* Transitions */
+  --transition: all 0.3s ease;
+}
+
+.dashboard {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  justify-content: space-between;
+  background-color: var(--primary);
+  color: var(--light);
+
+  .title{
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+  }
+  button {
+    background-color: var(--secondary);
+    color: var(--white);
+    border: none;
+    padding: var(--space-sm) var(--space-sm);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    
+    &:hover {
+      background-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+  }
+}
+
+.add {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--dark);
+  background-color: var(--secondary);
+  margin: var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 5px;
+  border: none;
+}
+.add:hover {
+  background-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.modules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+}
+.module {
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  width: 500px;
+  text-align: center;
+  transition: var(--transition);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+
+  h3 {
+    font-family: var(--font-title);
+    color: var(--primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  p {
+    font-family: var(--font-main);
+    color: var(--dark);
+    margin-bottom: var(--space-md);
+  }
+  
+}
+  
+.modifier {
+      background-color: var(--secondary);
+      color: var(--white);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-md);
+      margin-right: var(--space-sm);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      
+      &:hover {
+        background-color: var(--accent);
+        box-shadow: var(--shadow-sm);
+      }
+    }
+
+    .supprimer {
+      background-color: var(--dark);
+      color: var(--white);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      
+      &:hover {
+        background-color: var(--primary);
+        box-shadow: var(--shadow-sm);
+      }
+    }
+
+    /* WhatsApp Settings Section */
+.whatsappSettingsSection {
+  background-color: var(--white);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-xl);
+  transition: var(--transition);
+}
+
+.whatsappSettingsSection:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.whatsappSettingsSection h2 {
+  font-family: var(--font-title);
+  color: var(--primary);
+  font-size: 1.25rem;
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.formLabel {
+  font-family: var(--font-main);
+  color: var(--dark);
+  font-weight: 500;
+  min-width: 150px;
+  white-space: nowrap;
+}
+
+.formInput {
+  flex: 1;
+  padding: var(--space-sm);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-main);
+  color: var(--dark);
+  transition: var(--transition);
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 2px rgba(141, 110, 99, 0.2);
+}
+
+.formInput::placeholder {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.formInput:disabled {
+  background-color: var(--light);
+  cursor: not-allowed;
+}
+
+.submitButton {
+  background-color: var(--secondary);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-main);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  margin-left: var(--space-sm);
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.submitButton:disabled {
+  background-color: var(--accent);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.errorMessage {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: var(--space-sm);
+  font-family: var(--font-main);
+  padding-left: var(--space-sm);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  
+  .formLabel {
+    margin-bottom: var(--space-xs);
+  }
+  
+  .formInput {
+    width: 100%;
+  }
+  
+  .submitButton {
+    margin-left: 0;
+    margin-top: var(--space-sm);
+    width: 100%;
+  }
+}
