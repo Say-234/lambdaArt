@@ -24,7 +24,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [whatsappNumber, setWhatsappNumber] = useState<string>(''); // Nouveau: État pour le numéro WhatsApp
-  const DEFAULT_WHATSAPP_NUMBER = '+22967507870'; // Ton numéro par défaut si non trouvé dans Firestore
+  const DEFAULT_WHATSAPP_NUMBER = '+229'; // Ton numéro par défaut si non trouvé dans Firestore
 
   useEffect(() => {
     setLoading(true);
@@ -135,21 +135,26 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Lambda'Art - L'Artisanat à Portée de Main</title>
+        <title>Lambda'Art - L'Art de faire, à Portée de Main</title>
         <meta name="description" content="Découvrez l'artisanat sous un nouveau jour avec nos formations pratiques et conviviales." />
         {/* Tu peux ajouter d'autres balises meta ici */}
       </Head>
 
       <header>
         <h1 className="logo">Lambda'<span>Art</span></h1>
-        <h2>L'ARTISANAT À PORTÉE DE MAIN</h2>
+        <h2>L'ART DE FAIRE, À PORTÉE DE MAIN</h2>
       </header>
 
       <section className="welcome-section">
         <div className="welcome-content">
-          <h2>Bienvenue chez Lambda'Art</h2>
-          <p>Découvrez l'artisanat sous un nouveau jour avec nos formations pratiques et conviviales. Que vous soyez débutant ou passionné, nos ateliers vous guident pas à pas dans la création d'objets uniques.</p>
-          <p>Rejoignez notre communauté d'artisans créatifs et laissez libre cours à votre imagination dans un environnement chaleureux et inspirant.</p>
+            <h2>Bienvenue chez Lambda'Art</h2>
+            <p>
+            Un espace de formation et d'expression dédié à toutes les formes de savoir-faire pratiques. De l'artisanat aux techniques manuelles, en passant par les activités créatives et techniques, nous vous offrons des ateliers accessibles, vivants et adaptés à tous les niveaux.<br />
+            Que vous souhaitiez apprendre un métier manuel, découvrir une passion ou développer des compétences utiles et monétisables, Lambda'Art vous accompagne dans un cadre convivial et motivant.
+            </p>
+            <p>
+            Rejoignez notre communauté dynamique de passionnés, de curieux et de créateurs. Avec Lambda'Art, révélez votre potentiel et construisez un avenir concret grâce à vos talents.
+            </p>
           <Link href="#contact" className="cta-button">
             Je m'inscris
           </Link>
