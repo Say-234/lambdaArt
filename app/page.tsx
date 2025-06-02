@@ -142,26 +142,21 @@ export default function HomePage() {
 
       <header>
         <h1 className="logo">Lambda'<span>Art</span></h1>
-        <h2>L'ART DE FAIRE, À PORTÉE DE MAIN</h2>
+        <h2>Imagination – Création – Découverte de soi</h2>
       </header>
 
       <section className="welcome-section">
         <div className="welcome-content">
             <h2>Bienvenue chez Lambda'Art</h2>
-            <p>
-            Un espace de formation et d'expression dédié à toutes les formes de savoir-faire pratiques. De l'artisanat aux techniques manuelles, en passant par les activités créatives et techniques, nous vous offrons des ateliers accessibles, vivants et adaptés à tous les niveaux.<br />
-            Que vous souhaitiez apprendre un métier manuel, découvrir une passion ou développer des compétences utiles et monétisables, Lambda'Art vous accompagne dans un cadre convivial et motivant.
-            </p>
-            <p>
-            Rejoignez notre communauté dynamique de passionnés, de curieux et de créateurs. Avec Lambda'Art, révélez votre potentiel et construisez un avenir concret grâce à vos talents.
-            </p>
+            <p>Un espace de formation et d'expression dédié à toutes les formes de savoir-faire pratiques. De l’artisanat aux techniques manuelles, en passant par les activités créatives et techniques, nous vous offrons des ateliers accessibles, vivants et adaptés à tous les niveaux.<br />Que vous souhaitiez apprendre un métier de vos mains, découvrir une passion ou développer des compétences utiles et monétisables, Lambda’Art vous accompagne pas à pas dans un cadre convivial et motivant.</p>
+            <p>Rejoignez une communauté dynamique et bienveillante de passionnés, de curieux et de créateurs. Avec Lambda’Art, révélez votre potentiel et construisez un avenir concret grâce à vos talents pratiques.</p>
           <Link href="#contact" className="cta-button">
             Je m'inscris
           </Link>
         </div>
       </section>
 
-      <h2 className="module-title">Nos Modules de Formation</h2>
+      <h2 className="module-title" id="modules-section">Nos Modules de Formation</h2>
       <section className="module-list">
         {modulesData.length > 0 ? (
           modulesData.map((module) => (

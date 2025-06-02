@@ -72,7 +72,7 @@ export default function ModuleDetailsPage() {
         <meta name="description" content={moduleData?.longDesc ?? ''} />
       </Head>
       <div className="details-container">
-        <Link href="/" className="back-btn">
+        <Link href="/#modules-section" className="back-btn">
           <i className="bx bx-arrow-back"></i> Retour aux modules
         </Link>
         {moduleData && (
