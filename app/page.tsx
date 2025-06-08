@@ -5,10 +5,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import ModulesCard from './components/ModulesCard';
 import './globals.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react'; // Assurez-vous que useRef est importé
 
 import { db } from './lib/firebase';
-import { collection, query, onSnapshot, QueryDocumentSnapshot, DocumentData, doc, getDoc } from 'firebase/firestore'; // Ajout de 'doc' et 'getDoc'
+import { collection, query, onSnapshot, QueryDocumentSnapshot, DocumentData, doc, getDoc } from 'firebase/firestore';
 
 interface Modules {
   slug: string;
@@ -23,17 +23,20 @@ export default function HomePage() {
   const [modulesData, setModulesData] = useState<Modules[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [whatsappNumber, setWhatsappNumber] = useState<string>(''); // Nouveau: État pour le numéro WhatsApp
-  const DEFAULT_WHATSAPP_NUMBER = '+229'; // Ton numéro par défaut si non trouvé dans Firestore
+  const [whatsappNumber, setWhatsappNumber] = useState<string>('');
+  const DEFAULT_WHATSAPP_NUMBER = '+229';
+
+  // Plus besoin de useSearchParams si on utilise le flag localStorage pour le défilement inter-pages
+  // const searchParams = useSearchParams();
+
+  const modulesSectionRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     setLoading(true);
     setError(null);
 
-    // Fonction asynchrone pour récupérer les données
     const fetchData = async () => {
       try {
-        // --- Récupération des modules ---
         const modulesCollectionRef = collection(db, 'modules');
         const q = modulesCollectionRef;
 
@@ -53,41 +56,72 @@ export default function HomePage() {
             }
           });
           setModulesData(modulesList);
-          setLoading(false); // Le chargement des modules est terminé ici
+          // Important : Mettre loading à false seulement après que les modules soient récupérés.
+          // Cela rend le useEffect de défilement plus fiable car il dépend de `!loading`.
+          setLoading(false);
         }, (err) => {
           console.error("Erreur lors de la récupération des modules en temps réel:", err);
           setError("Échec du chargement des modules. Veuillez réessayer plus tard.");
           setLoading(false);
         });
 
-        // --- Récupération du numéro WhatsApp ---
         const settingsDocRef = doc(db, 'settings', 'global');
-        const settingsDoc = await getDoc(settingsDocRef); // Utilise getDoc ici, car c'est un document unique
+        const settingsDoc = await getDoc(settingsDocRef);
         if (settingsDoc.exists()) {
           setWhatsappNumber(settingsDoc.data().whatsappNumber || DEFAULT_WHATSAPP_NUMBER);
         } else {
-          setWhatsappNumber(DEFAULT_WHATSAPP_NUMBER); // Utilise le numéro par défaut si le document n'existe pas
+          setWhatsappNumber(DEFAULT_WHATSAPP_NUMBER);
         }
 
-        // Retourne la fonction de nettoyage pour le listener des modules
         return () => unsubscribeModules();
 
       } catch (err: any) {
         console.error("Erreur globale lors de la récupération des données:", err);
         setError("Une erreur est survenue lors du chargement des données. Veuillez réessayer plus tard.");
-        setLoading(false); // S'assurer que le chargement se termine même en cas d'erreur
+        setLoading(false);
       }
     };
 
-    fetchData(); // Appelle la fonction de récupération des données
+    fetchData();
 
-  }, []); // Le tableau de dépendances vide signifie que cet effet ne s'exécute qu'une fois au montage
+  }, []); // Tableau de dépendances vide, s'exécute une fois au montage
+
+  // NOUVEL EFFET POUR GÉRER LE DÉFILEMENT APRÈS LE CHARGEMENT INITIAL ET QUAND LES DONNÉES SONT PRÊTES
+  useEffect(() => {
+    // Tenter de défiler seulement si le chargement initial des données est terminé ET que modulesData n'est pas vide
+    // (Cela garantit que les éléments DOM pour les modules sont probablement rendus)
+    if (!loading && modulesData.length > 0) {
+      const shouldScroll = localStorage.getItem('scrollToModules');
+
+      if (shouldScroll === 'true' && modulesSectionRef.current) {
+        console.log("Tentative de défilement vers la section des modules...");
+        console.log("modulesSectionRef.current:", modulesSectionRef.current);
+
+        // Délai augmenté pour permettre plus de temps de rendu
+        const timer = setTimeout(() => {
+          if (modulesSectionRef.current) {
+            modulesSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            localStorage.removeItem('scrollToModules'); // Effacer le flag après le défilement réussi
+            console.log("Défilement vers la section des modules tenté et flag effacé.");
+          } else {
+            console.warn("modulesSectionRef.current est null même après le délai.");
+          }
+        }, 500); // <-- Délai augmenté à 500ms (essayez 1000ms si 500 échoue)
+
+        return () => clearTimeout(timer); // Nettoyer le timer
+      } else if (shouldScroll === 'true' && !modulesSectionRef.current) {
+        console.warn("Flag localStorage défini, mais modulesSectionRef.current est null avant le délai.");
+      } else if (shouldScroll === 'true' && modulesData.length === 0) {
+        console.warn("Flag localStorage défini, mais modulesData est vide. Impossible de défiler vers la section des modules.");
+      }
+    } else {
+      console.log("Pas prêt à défiler : loading=", loading, "modulesData.length=", modulesData.length);
+    }
+  }, [loading, modulesData]); // Dépend de loading et modulesData pour réévaluer quand les données sont prêtes
 
 
-  // Fonction pour générer l'URL WhatsApp
   const getWhatsappLink = (number: string, message: string = "Bonjour, je suis intéressé par votre formation.") => {
     const encodedMessage = encodeURIComponent(message);
-    // Supprimer les espaces et autres caractères non numériques du numéro pour l'URL
     const cleanedNumber = number.replace(/\D/g, '');
     return `https://wa.me/${cleanedNumber}?text=${encodedMessage}`;
   };
@@ -97,7 +131,6 @@ export default function HomePage() {
     event.preventDefault();
     if (selectedModule && comment.trim()) {
       const message = `Nouveau commentaire via le site :\nModule : ${selectedModule}\nMessage : ${comment}`;
-      // Utilise le numéro WhatsApp dynamique
       if (whatsappNumber) {
         window.open(getWhatsappLink(whatsappNumber, message), '_blank');
       } else {
@@ -126,7 +159,6 @@ export default function HomePage() {
     return <p>Erreur: {error}</p>;
   }
 
-  // Pas de modules ou numéro non configuré
   if (modulesData.length === 0 && !whatsappNumber) {
     return <p>Aucun contenu disponible pour le moment. Veuillez vérifier votre connexion ou si le contenu est configuré.</p>;
   }
@@ -137,7 +169,6 @@ export default function HomePage() {
       <Head>
         <title>Lambda'Art - L'Art de faire, à Portée de Main</title>
         <meta name="description" content="Découvrez l'artisanat sous un nouveau jour avec nos formations pratiques et conviviales." />
-        {/* Tu peux ajouter d'autres balises meta ici */}
       </Head>
 
       <header>
@@ -147,16 +178,17 @@ export default function HomePage() {
 
       <section className="welcome-section">
         <div className="welcome-content">
-            <h2>Bienvenue chez Lambda'Art</h2>
-            <p>Un espace de formation et d'expression dédié à toutes les formes de savoir-faire pratiques. De l’artisanat aux techniques manuelles, en passant par les activités créatives et techniques, nous vous offrons des ateliers accessibles, vivants et adaptés à tous les niveaux.<br />Que vous souhaitiez apprendre un métier de vos mains, découvrir une passion ou développer des compétences utiles et monétisables, Lambda’Art vous accompagne pas à pas dans un cadre convivial et motivant.</p>
-            <p>Rejoignez une communauté dynamique et bienveillante de passionnés, de curieux et de créateurs. Avec Lambda’Art, révélez votre potentiel et construisez un avenir concret grâce à vos talents pratiques.</p>
+          <h2>Bienvenue chez Lambda'Art</h2>
+          <p>Un espace de formation et d'expression dédié à toutes les formes de savoir-faire pratiques. De l’artisanat aux techniques manuelles, en passant par les activités créatives et techniques, nous vous offrons des ateliers accessibles, vivants et adaptés à tous les niveaux.<br />Que vous souhaitiez apprendre un métier de vos mains, découvrir une passion ou développer des compétences utiles et monétisables, Lambda’Art vous accompagne pas à pas dans un cadre convivial et motivant.</p>
+          <p>Rejoignez une communauté dynamique et bienveillante de passionnés, de curieux et de créateurs. Avec Lambda’Art, révélez votre potentiel et construisez un avenir concret grâce à vos talents pratiques.</p>
           <Link href="#contact" className="cta-button">
             Je m'inscris
           </Link>
         </div>
       </section>
 
-      <h2 className="module-title" id="modules-section">Nos Modules de Formation</h2>
+      {/* Attachez la ref au H2 */}
+      <h2 className="module-title" ref={modulesSectionRef}>Nos Modules de Formation</h2>
       <section className="module-list">
         {modulesData.length > 0 ? (
           modulesData.map((module) => (
@@ -171,7 +203,6 @@ export default function HomePage() {
         <h2>Contactez-nous</h2>
         <p>Pour réserver votre place ou obtenir plus d'informations :</p>
         <div className="contact-methods">
-          {/* Utilise le numéro WhatsApp dynamique ici */}
           {whatsappNumber ? (
             <Link href={getWhatsappLink(whatsappNumber)} target="_blank" rel="noopener" className="whatsapp-button">
               <i className="bx bxl-whatsapp"></i> WhatsApp

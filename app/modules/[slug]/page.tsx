@@ -1,3 +1,4 @@
+// app/modules/[slug]/page.tsx
 'use client';
 import { useParams, useRouter } from 'next/navigation';
 import Head from 'next/head';
@@ -17,11 +18,17 @@ interface Module {
 
 export default function ModuleDetailsPage() {
   const router = useRouter();
-  const params = useParams();
-  const moduleSlug = params.slug as string;
+  const params = useParams() as { slug: string };
+  const moduleSlug = params.slug;
   const [loading, setLoading] = useState(true);
   const [moduleData, setModuleData] = useState<Module | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const handleBackClick = () => {
+    // Définir le flag localStorage
+    localStorage.setItem('scrollToModules', 'true');
+    // Le composant Link gérera la navigation vers la page d'accueil
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -44,7 +51,7 @@ export default function ModuleDetailsPage() {
           setModuleData(foundModule);
         } else {
           setError('Module non trouvé');
-          router.push('/');
+          router.push('/'); // Rediriger si le module n'est pas trouvé
         }
       } catch (err) {
         console.error("Erreur lors de la récupération des données du module:", err);
@@ -55,7 +62,7 @@ export default function ModuleDetailsPage() {
     };
 
     fetchModuleData();
-  }, [moduleSlug, router]);
+  }, [moduleSlug, router]); // Dépend de moduleSlug et router pour la logique de rechargement
 
   if (loading) {
     return <div className="module-details"><p>Chargement...</p></div>;
@@ -72,7 +79,8 @@ export default function ModuleDetailsPage() {
         <meta name="description" content={moduleData?.longDesc ?? ''} />
       </Head>
       <div className="details-container">
-        <Link href="/#modules-section" className="back-btn">
+        {/* Le composant Link déclenchera la navigation et le onClick */}
+        <Link href="/" className="back-btn" onClick={handleBackClick}>
           <i className="bx bx-arrow-back"></i> Retour aux modules
         </Link>
         {moduleData && (
