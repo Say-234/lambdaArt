@@ -398,6 +398,607 @@ textarea {
   background-color: var(--dark);
 }
 
+
+/* ======================== */
+/* STYLES GÉNÉRAUX */
+/* ======================== */
+body {
+    font-family: var(--font-main);
+    color: var(--black);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light); /* Utilisation de ta couleur claire pour le fond général */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-title);
+    color: var(--dark); /* Les titres utilisent la couleur foncée */
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--secondary);
+}
+
+/* ======================== */
+/* STYLES DU HEADER ET CTA */
+/* ======================== */
+
+header {
+    background-color: var(--primary); /* Utilise la couleur principale pour le header */
+    color: var(--white);
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.logo {
+    font-family: var(--font-title);
+    font-size: 3rem;
+    margin-bottom: var(--space-xs);
+    color: var(--white);
+}
+
+.logo span {
+    color: var(--accent); /* Couleur accent pour le span du logo */
+}
+
+header h2 {
+    font-family: var(--font-main); /* Le sous-titre peut rester en font-main */
+    font-size: 1.2rem;
+    color: var(--light);
+    margin-bottom: 0;
+}
+
+.welcome-section {
+    background-color: var(--white);
+    padding: var(--space-xl) var(--space-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.welcome-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.welcome-content h2 {
+    color: var(--primary);
+    font-size: 2.8rem;
+    margin-bottom: var(--space-md);
+}
+
+.welcome-content p {
+    color: var(--dark);
+    font-size: 1.1rem;
+    margin-bottom: var(--space-lg);
+    line-height: 1.7;
+}
+
+.cta-button {
+    background-color: var(--primary); /* Couleur principale */
+    color: var(--white);
+    padding: 15px 30px;
+    border-radius: var(--radius-lg); /* Bordures plus arrondies */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.cta-button:hover {
+    background-color: var(--dark); /* Couleur plus foncée au survol */
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.module-title {
+    color: var(--primary); /* Le titre des modules utilise la couleur principale */
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.module-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-lg) var(--space-md);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Styles pour ModulesCard (supposant que tu as déjà un fichier ModulesCard.css ou que tu le mets ici) */
+.module-card {
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-md);
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.module-card-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-md);
+    object-fit: contain;
+}
+
+.module-card h3 {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: var(--space-xs);
+}
+
+.module-card p {
+    font-size: 0.95rem;
+    color: var(--dark);
+    margin-bottom: var(--space-md);
+    flex-grow: 1; /* Permet au paragraphe de prendre l'espace disponible */
+}
+
+.module-card-button {
+    background-color: var(--secondary); /* Couleur secondaire pour le bouton */
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    align-self: center; /* Centre le bouton */
+}
+
+.module-card-button:hover {
+    background-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+/* ======================== */
+/* STYLES DU FORMULAIRE D'INSCRIPTION */
+/* ======================== */
+
+.form-section {
+    background-color: var(--accent); /* Fond du formulaire utilisant ta couleur accent */
+    padding: var(--space-xl) var(--space-md);
+    text-align: center;
+    border-top: 1px solid rgba(var(--dark), 0.1);
+    border-bottom: 1px solid rgba(var(--dark), 0.1);
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--white);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg); /* Une ombre plus prononcée pour le formulaire */
+    border: 1px solid var(--light);
+}
+
+.form-title {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: var(--space-md);
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.form-description {
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+}
+
+.registration-form {
+    display: grid;
+    gap: var(--space-lg); /* Espace entre les groupes de formulaires */
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 0.95rem;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--secondary); /* Bordure légèrement plus visible */
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    color: var(--dark);
+    transition: var(--transition);
+    box-sizing: border-box;
+    background-color: var(--light); /* Fond légèrement coloré */
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--secondary); /* Placeholder en couleur secondaire */
+    opacity: 0.7;
+}
+
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2); /* Ajout d'une ombre au focus */
+    outline: none;
+    background-color: var(--white); /* Retour au blanc au focus */
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px; /* Légèrement plus grand par défaut */
+}
+
+.modules-label {
+    font-size: 1rem !important;
+    margin-bottom: var(--space-md) !important;
+}
+
+.modules-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 2 colonnes sur desktop, s'adapte */
+    gap: var(--space-md); /* Espace entre les checkboxes */
+    background-color: var(--light); /* Fond du cadre des modules */
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--secondary);
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: var(--dark);
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Cacher la checkbox native */
+.checkbox-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Style de la checkbox customisée */
+.checkbox-custom {
+    height: 22px;
+    width: 22px;
+    background-color: var(--white);
+    border-radius: var(--radius-sm); /* Bords légèrement arrondis */
+    border: 2px solid var(--secondary);
+    margin-right: 10px;
+    display: inline-block;
+    position: relative;
+    transition: var(--transition);
+}
+
+/* Marque de coche */
+.checkbox-custom:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid var(--white);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+/* Style quand la checkbox est cochée */
+.checkbox-input:checked ~ .checkbox-custom {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.checkbox-input:checked ~ .checkbox-custom:after {
+    display: block;
+}
+
+/* Effet au survol */
+.checkbox-item:hover .checkbox-custom {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
+}
+
+.submit-btn {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 15px 25px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: var(--space-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.submit-btn:hover {
+    background-color: var(--dark); /* Teinte plus foncée au survol */
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.submit-btn:disabled {
+    background-color: var(--secondary); /* Couleur secondaire pour l'état désactivé */
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.submit-message {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 1rem;
+    background-color: #e6ffe6; /* Couleur de succès, peut être personnalisée */
+    color: #28a745; /* Texte de succès */
+    border: 1px solid #28a745;
+    text-align: center;
+}
+
+/* Styles pour les messages d'erreur */
+.submit-message.error {
+    background-color: #ffe6e6;
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* ======================== */
+/* STYLES DE LA SECTION CONTACT (Si tu la gardes séparée) */
+/* ======================== */
+#contact {
+    background-color: var(--white);
+    padding: var(--space-xl) var(--space-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+#contact h2 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+}
+
+#contact p {
+    color: var(--dark);
+    font-size: 1.1rem;
+    margin-bottom: var(--space-lg);
+}
+
+.contact-methods {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap; /* Pour la réactivité */
+}
+
+.whatsapp-button {
+    background-color: #25d366; /* Vert WhatsApp */
+    color: var(--white);
+    padding: 15px 30px;
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.whatsapp-button:hover {
+    background-color: #1da851;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.whatsapp-button i {
+    font-size: 1.5em;
+}
+
+/* ======================== */
+/* STYLES DE LA PAGE DE DÉTAIL DES MODULES */
+/* ======================== */
+.module-details {
+    padding: var(--space-xl) var(--space-md);
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.module-details .details-container {
+    padding: var(--space-lg);
+}
+
+.module-details h2 {
+    color: var(--primary);
+    font-size: 2.8rem;
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.module-details .long-desc {
+    font-size: 1.1rem;
+    color: var(--dark);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+}
+
+.module-details .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.module-details .gallery-image {
+    width: 100%;
+    height: 150px; /* Hauteur fixe pour uniformité */
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.module-details .gallery-image:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-md);
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+    transition: var(--transition);
+}
+
+.back-btn:hover {
+    color: var(--dark);
+    transform: translateX(-5px);
+}
+
+.back-btn i {
+    font-size: 1.2rem;
+}
+
+
+/* ======================== */
+/* RESPONSIVE DESIGN */
+/* ======================== */
+
+@media (max-width: 1024px) {
+    .logo {
+        font-size: 2.5rem;
+    }
+    .welcome-content h2, .module-title, .form-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: var(--space-md) var(--space-sm);
+    }
+    .logo {
+        font-size: 2rem;
+    }
+    header h2 {
+        font-size: 1rem;
+    }
+    .welcome-section, .form-section, #contact, .module-details {
+        padding: var(--space-lg) var(--space-sm);
+    }
+    .welcome-content h2, .module-title, .form-title, .module-details h2 {
+        font-size: 1.8rem;
+    }
+    .welcome-content p, .form-description, #contact p, .module-details .long-desc {
+        font-size: 0.95rem;
+    }
+    .cta-button, .whatsapp-button {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    .module-list {
+        grid-template-columns: 1fr;
+        padding: var(--space-md);
+    }
+    .form-container {
+        padding: var(--space-lg);
+        margin: 0 var(--space-sm);
+    }
+    .modules-checkbox-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur petits écrans */
+    }
+    .submit-btn {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+    .module-card h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.8rem;
+    }
+    .welcome-content h2, .module-title, .form-title, .module-details h2 {
+        font-size: 1.5rem;
+    }
+    .form-input, .form-textarea, .submit-btn {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+    .checkbox-item {
+        font-size: 0.85rem;
+    }
+    .checkbox-custom {
+        height: 18px;
+        width: 18px;
+    }
+    .checkbox-custom:after {
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border-width: 0 2px 2px 0;
+    }
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
   .module-list {
