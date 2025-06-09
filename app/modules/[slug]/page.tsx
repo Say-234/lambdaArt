@@ -1,7 +1,7 @@
 // app/modules/[slug]/page.tsx
 'use client';
 import { useParams, useRouter } from 'next/navigation';
-import Head from 'next/head';
+import Head from 'next/head'; // Importe Head si ce n'est pas déjà fait
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -25,7 +25,6 @@ export default function ModuleDetailsPage() {
   const [error, setError] = useState<string | null>(null);
 
   const handleBackClick = () => {
-    // Définir le flag localStorage
     localStorage.setItem('scrollToModules', 'true');
     // Le composant Link gérera la navigation vers la page d'accueil
   };
@@ -51,7 +50,7 @@ export default function ModuleDetailsPage() {
           setModuleData(foundModule);
         } else {
           setError('Module non trouvé');
-          router.push('/'); // Rediriger si le module n'est pas trouvé
+          router.push('/');
         }
       } catch (err) {
         console.error("Erreur lors de la récupération des données du module:", err);
@@ -62,7 +61,7 @@ export default function ModuleDetailsPage() {
     };
 
     fetchModuleData();
-  }, [moduleSlug, router]); // Dépend de moduleSlug et router pour la logique de rechargement
+  }, [moduleSlug, router]);
 
   if (loading) {
     return <div className="module-details"><p>Chargement...</p></div>;
@@ -79,7 +78,6 @@ export default function ModuleDetailsPage() {
         <meta name="description" content={moduleData?.longDesc ?? ''} />
       </Head>
       <div className="details-container">
-        {/* Le composant Link déclenchera la navigation et le onClick */}
         <Link href="/" className="back-btn" onClick={handleBackClick}>
           <i className="bx bx-arrow-back"></i> Retour aux modules
         </Link>
@@ -93,8 +91,8 @@ export default function ModuleDetailsPage() {
                   key={index}
                   src={imgSrc}
                   alt={`${moduleData.title} image ${index + 1}`}
-                  width={200}
-                  height={150}
+                  width={200} // Ces dimensions sont utilisées pour la proportion, mais le CSS gère le rendu final
+                  height={200} // Ajusté à 200 pour mieux correspondre à l'aspect carré désiré
                   className="gallery-image"
                 />
               ))}

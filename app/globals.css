@@ -1,3 +1,4 @@
+/* globals.css */
 @import "tailwindcss";
 
 :root {
@@ -22,7 +23,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif; /* Ceci est écrasé plus bas, mais Next.js pourrait l'utiliser par défaut */
 }
 
 :root {
@@ -67,338 +68,6 @@ body {
   box-sizing: border-box;
 }
 
-body {
-  font-family: var(--font-main);
-  line-height: 1.6;
-  color: var(--black);
-  background-color: var(--light);
-   text-align: center;
-  position: relative;
-  justify-content: center;
-}
-
-h1, h2, h3 {
-  font-family: var(--font-title);
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Header */
-header {
-  background: linear-gradient(135deg, var(--primary), var(--dark));
-  color: var(--light);
-  padding: var(--space-xl) var(--space-md);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  justify-content: center;
-}
-
-.logo {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-sm);
-}
-  
-.logo span {
-  color: var(--accent);
-}
-
-.tagline {
-  font-size: 1.2rem;
-  font-weight: 300;
-  letter-spacing: 1px;
-}
-
-/* Section Bienvenue */
-.welcome-section {
-  padding: var(--space-xl) 0;
-  background-color: var(--white);
-}
-
-.welcome-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--space-md);
-}
-
-.welcome-content {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.welcome-content h2 {
-  font-size: 2rem;
-  color: var(--primary);
-  margin-bottom: var(--space-md);
-}
-
-.welcome-content p {
-  margin-bottom: var(--space-md);
-  color: var(--black);
-}
-
-.cta-button {
-  display: inline-block;
-  background-color: var(--primary);
-  color: var(--light);
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-md);
-  margin-top: var(--space-md);
-  transition: var(--transition);
-  font-weight: 500;
-}
-
-.cta-button:hover {
-  background-color: var(--dark);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Modules */
-.modules-section {
-  padding: var(--space-xl) 0;
-  background-color: var(--light);
-}
-
-.module-title {
-  text-align: center;
-  color: var(--primary);
-  margin: var(--space-lg);
-  font-size: 1.8rem;
-}
-
-.module-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--space-md);
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--space-md);
-}
-
-.module-card {
-  background: var(--white);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
-}
-
-.module-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-
-.module-header {
-  display: flex;
-  align-items: center;
-  padding: var(--space-md);
-  cursor: pointer;
-}
-
-.module-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  object-fit: cover;
-  margin-right: var(--space-md);
-  border: 2px solid var(--accent);
-}
-
-.module-title h3 {
-  font-size: 1.2rem;
-  color: var(--primary);
-}
-
-.short-desc {
-  font-size: 0.9rem;
-  color: var(--secondary);
-}
-
-.toggle-btn {
-  background: none;
-  border: none;
-  color: var(--primary);
-  font-size: 1.5rem;
-  margin-left: auto;
-  cursor: pointer;
-  transition: var(--transition);
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-
-.toggle-btn:hover {
-  background-color: rgba(0,0,0,0.05);
-}
-
-/* Détails des modules */
-.module-details {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--white);
-  padding: var(--space-xl);
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-.details-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  background-color: var(--primary);
-  color: var(--white);
-  padding: var(--space-xs) var(--space-md);
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-lg);
-  cursor: pointer;
-  transition: var(--transition);
-  border: none;
-}
-
-.back-btn:hover {
-  background-color: var(--dark);
-}
-
-.long-desc {
-  margin-bottom: var(--space-lg);
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
-}
-
-.gallery img {
-  border-radius: var(--radius-sm);
-  transition: var(--transition);
-}
-
-.gallery img:hover {
-  transform: scale(1.02);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Contact */
-.animated-section {
-  text-align: center;
-  background-color: var(--white);
-  padding: var(--space-xl) var(--space-md);
-  margin: var(--space-lg) var(--space-md);
-  position: relative; 
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-
-.contact-section h2 {
-  color: var(--primary);
-  margin-bottom: var(--space-sm);
-}
-
-.whatsapp-button {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  background-color: #25D366;
-  color: white;
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-md);
-  margin-top: var(--space-md);
-  transition: var(--transition);
-}
-
-.whatsapp-button:hover {
-  background-color: #128C7E;
-  transform: translateY(-2px);
-}
-
-/* Formulaire */
-#commentaires {
-  max-width: 600px;
-  margin: var(--space-xl) auto;
-  padding: 0 var(--space-md);
-}
-
-#commentaires h2 {
-  text-align: center;
-  color: var(--primary);
-  margin-bottom: var(--space-lg);
-}
-
-#comment-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-label {
-  font-weight: 500;
-  color: var(--primary);
-}
-
-select, textarea {
-  padding: var(--space-sm);
-  border: 1px solid #ddd;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-main);
-}
-
-textarea {
-  min-height: 150px;
-  resize: vertical;
-}
-
-.submit-btn {
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  padding: var(--space-sm);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-xs);
-}
-
-.submit-btn:hover {
-  background-color: var(--dark);
-}
-
-
 /* ======================== */
 /* STYLES GÉNÉRAUX */
 /* ======================== */
@@ -408,16 +77,18 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: var(--light); /* Utilisation de ta couleur claire pour le fond général */
+    background-color: var(--light);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-y: scroll; /* Assure le défilement */
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-title);
-    color: var(--dark); /* Les titres utilisent la couleur foncée */
+    color: var(--dark);
     margin-top: 0;
     margin-bottom: var(--space-md);
+    font-weight: 700; /* Rendre tous les titres bold par défaut */
 }
 
 a {
@@ -430,12 +101,18 @@ a:hover {
     color: var(--secondary);
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
 /* ======================== */
 /* STYLES DU HEADER ET CTA */
 /* ======================== */
 
 header {
-    background-color: var(--primary); /* Utilise la couleur principale pour le header */
+    background-color: var(--primary);
     color: var(--white);
     padding: var(--space-lg) var(--space-md);
     text-align: center;
@@ -450,11 +127,11 @@ header {
 }
 
 .logo span {
-    color: var(--accent); /* Couleur accent pour le span du logo */
+    color: var(--accent);
 }
 
 header h2 {
-    font-family: var(--font-main); /* Le sous-titre peut rester en font-main */
+    font-family: var(--font-main);
     font-size: 1.2rem;
     color: var(--light);
     margin-bottom: 0;
@@ -486,10 +163,10 @@ header h2 {
 }
 
 .cta-button {
-    background-color: var(--primary); /* Couleur principale */
+    background-color: var(--primary);
     color: var(--white);
     padding: 15px 30px;
-    border-radius: var(--radius-lg); /* Bordures plus arrondies */
+    border-radius: var(--radius-lg);
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
@@ -498,90 +175,96 @@ header h2 {
 }
 
 .cta-button:hover {
-    background-color: var(--dark); /* Couleur plus foncée au survol */
+    background-color: var(--dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
 
+/* Modules */
+.modules-section {
+  padding: var(--space-xl) 0;
+  background-color: var(--light);
+  margin-bottom: var(--space-xl); /* Ajout d'espace sous la section des modules */
+}
+
 .module-title {
-    color: var(--primary); /* Le titre des modules utilise la couleur principale */
-    text-align: center;
-    font-size: 2.5rem;
-    margin-top: var(--space-xl);
-    margin-bottom: var(--space-lg);
+  text-align: center;
+  color: var(--primary);
+  margin-top: var(--space-xl); /* Assure un bon espace au-dessus */
+  margin-bottom: var(--space-lg);
+  font-size: 2.5rem; /* Augmentation de la taille pour un grand titre */
+  font-weight: 700; /* Rendre ce titre bold */
 }
 
 .module-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-lg);
-    padding: var(--space-lg) var(--space-md);
-    max-width: 1200px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  justify-content: center; /* Centre les éléments de la grille si le nombre n'est pas pair */
 }
 
-/* Styles pour ModulesCard (supposant que tu as déjà un fichier ModulesCard.css ou que tu le mets ici) */
 .module-card {
-    background-color: var(--white);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    overflow: hidden;
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: var(--space-md);
+  background: var(--white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: var(--space-md);
 }
 
 .module-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
 }
 
-.module-card-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto var(--space-md);
-    object-fit: contain;
+.module-card .module-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0;
 }
 
-.module-card h3 {
-    font-family: var(--font-title);
-    font-size: 1.5rem;
-    color: var(--primary);
-    margin-bottom: var(--space-xs);
+.module-card .module-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+  margin-right: var(--space-md);
+  border: 2px solid var(--accent);
 }
 
-.module-card p {
-    font-size: 0.95rem;
-    color: var(--dark);
-    margin-bottom: var(--space-md);
-    flex-grow: 1; /* Permet au paragraphe de prendre l'espace disponible */
+.module-card .module-title-content {
+  text-align: left;
+  flex-grow: 1;
 }
 
-.module-card-button {
-    background-color: var(--secondary); /* Couleur secondaire pour le bouton */
-    color: var(--white);
-    padding: 10px 20px;
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: var(--transition);
-    align-self: center; /* Centre le bouton */
+.module-card .module-title-content h3 {
+  margin-bottom: var(--space-xs);
+  font-size: 1.4rem;
+  color: var(--primary);
 }
 
-.module-card-button:hover {
-    background-color: var(--primary);
-    transform: translateY(-1px);
+.module-card .short-desc {
+  font-size: 0.9rem;
+  color: var(--dark);
 }
+
 
 /* ======================== */
 /* STYLES DU FORMULAIRE D'INSCRIPTION */
 /* ======================== */
 
 .form-section {
-    background-color: var(--accent); /* Fond du formulaire utilisant ta couleur accent */
+    margin-top: var(--space-xl); /* Ajout d'espace au-dessus de la section d'inscription */
+    background-color: var(--accent);
     padding: var(--space-xl) var(--space-md);
     text-align: center;
     border-top: 1px solid rgba(var(--dark), 0.1);
@@ -594,7 +277,7 @@ header h2 {
     background-color: var(--white);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg); /* Une ombre plus prononcée pour le formulaire */
+    box-shadow: var(--shadow-lg);
     border: 1px solid var(--light);
 }
 
@@ -602,7 +285,7 @@ header h2 {
     font-size: 2.5rem;
     color: var(--primary);
     margin-bottom: var(--space-md);
-    font-weight: 700;
+    font-weight: 700; /* Rendre ce titre bold */
     text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
@@ -615,7 +298,7 @@ header h2 {
 
 .registration-form {
     display: grid;
-    gap: var(--space-lg); /* Espace entre les groupes de formulaires */
+    gap: var(--space-lg);
     text-align: left;
 }
 
@@ -631,18 +314,18 @@ header h2 {
 .form-textarea {
     width: 100%;
     padding: 14px 18px;
-    border: 1px solid var(--secondary); /* Bordure légèrement plus visible */
+    border: 1px solid var(--secondary);
     border-radius: var(--radius-md);
     font-size: 1rem;
     color: var(--dark);
     transition: var(--transition);
     box-sizing: border-box;
-    background-color: var(--light); /* Fond légèrement coloré */
+    background-color: var(--light);
 }
 
 .form-input::placeholder,
 .form-textarea::placeholder {
-    color: var(--secondary); /* Placeholder en couleur secondaire */
+    color: var(--secondary);
     opacity: 0.7;
 }
 
@@ -650,14 +333,14 @@ header h2 {
 .form-input:focus,
 .form-textarea:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2); /* Ajout d'une ombre au focus */
+    box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.2);
     outline: none;
-    background-color: var(--white); /* Retour au blanc au focus */
+    background-color: var(--white);
 }
 
 .form-textarea {
     resize: vertical;
-    min-height: 120px; /* Légèrement plus grand par défaut */
+    min-height: 120px;
 }
 
 .modules-label {
@@ -667,9 +350,9 @@ header h2 {
 
 .modules-checkbox-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 2 colonnes sur desktop, s'adapte */
-    gap: var(--space-md); /* Espace entre les checkboxes */
-    background-color: var(--light); /* Fond du cadre des modules */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+    background-color: var(--light);
     padding: var(--space-md);
     border-radius: var(--radius-md);
     border: 1px solid var(--secondary);
@@ -685,7 +368,6 @@ header h2 {
     user-select: none;
 }
 
-/* Cacher la checkbox native */
 .checkbox-input {
     position: absolute;
     opacity: 0;
@@ -694,12 +376,11 @@ header h2 {
     width: 0;
 }
 
-/* Style de la checkbox customisée */
 .checkbox-custom {
     height: 22px;
     width: 22px;
     background-color: var(--white);
-    border-radius: var(--radius-sm); /* Bords légèrement arrondis */
+    border-radius: var(--radius-sm);
     border: 2px solid var(--secondary);
     margin-right: 10px;
     display: inline-block;
@@ -707,7 +388,6 @@ header h2 {
     transition: var(--transition);
 }
 
-/* Marque de coche */
 .checkbox-custom:after {
     content: "";
     position: absolute;
@@ -721,7 +401,6 @@ header h2 {
     transform: rotate(45deg);
 }
 
-/* Style quand la checkbox est cochée */
 .checkbox-input:checked ~ .checkbox-custom {
     background-color: var(--primary);
     border-color: var(--primary);
@@ -731,10 +410,9 @@ header h2 {
     display: block;
 }
 
-/* Effet au survol */
 .checkbox-item:hover .checkbox-custom {
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
+    box-shadow: 0 0 0 2px rgba(93, 64, 55, 0.1);
 }
 
 .submit-btn {
@@ -756,13 +434,13 @@ header h2 {
 }
 
 .submit-btn:hover {
-    background-color: var(--dark); /* Teinte plus foncée au survol */
+    background-color: var(--dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
 
 .submit-btn:disabled {
-    background-color: var(--secondary); /* Couleur secondaire pour l'état désactivé */
+    background-color: var(--secondary);
     cursor: not-allowed;
     box-shadow: none;
     transform: none;
@@ -774,13 +452,12 @@ header h2 {
     border-radius: var(--radius-md);
     font-weight: 500;
     font-size: 1rem;
-    background-color: #e6ffe6; /* Couleur de succès, peut être personnalisée */
-    color: #28a745; /* Texte de succès */
+    background-color: #e6ffe6;
+    color: #28a745;
     border: 1px solid #28a745;
     text-align: center;
 }
 
-/* Styles pour les messages d'erreur */
 .submit-message.error {
     background-color: #ffe6e6;
     color: #dc3545;
@@ -788,7 +465,7 @@ header h2 {
 }
 
 /* ======================== */
-/* STYLES DE LA SECTION CONTACT (Si tu la gardes séparée) */
+/* STYLES DE LA SECTION CONTACT */
 /* ======================== */
 #contact {
     background-color: var(--white);
@@ -813,11 +490,11 @@ header h2 {
     display: flex;
     justify-content: center;
     gap: var(--space-lg);
-    flex-wrap: wrap; /* Pour la réactivité */
+    flex-wrap: wrap;
 }
 
 .whatsapp-button {
-    background-color: #25d366; /* Vert WhatsApp */
+    background-color: #25d366;
     color: var(--white);
     padding: 15px 30px;
     border-radius: var(--radius-lg);
@@ -852,10 +529,14 @@ header h2 {
     box-shadow: var(--shadow-md);
     margin-top: var(--space-xl);
     margin-bottom: var(--space-xl);
+    text-align: center;
 }
 
 .module-details .details-container {
     padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre les éléments horizontalement */
 }
 
 .module-details h2 {
@@ -870,6 +551,7 @@ header h2 {
     color: var(--dark);
     line-height: 1.7;
     margin-bottom: var(--space-lg);
+    text-align: center;
 }
 
 .module-details .gallery {
@@ -878,15 +560,20 @@ header h2 {
     gap: var(--space-md);
     margin-top: var(--space-lg);
     margin-bottom: var(--space-xl);
+    justify-content: center; /* Centre les lignes de la grille */
+    align-items: flex-start; /* Aligne les éléments au début de leur axe transversal (utile si les hauteurs varient) */
 }
 
 .module-details .gallery-image {
     width: 100%;
-    height: 150px; /* Hauteur fixe pour uniformité */
+    height: 200px;
     object-fit: cover;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
+    aspect-ratio: 1 / 1;
+    display: block; /* S'assure que l'image est un bloc pour margin auto */
+    margin: 0 auto; /* Centre l'image dans sa cellule de grille */
 }
 
 .module-details .gallery-image:hover {
@@ -898,15 +585,27 @@ header h2 {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--primary);
-    font-weight: 600;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-sm);
     margin-bottom: var(--space-lg);
+    cursor: pointer;
     transition: var(--transition);
+    border: none;
 }
 
+/* Le bouton de retour sera centré par align-items: center sur .details-container */
+/* Retire la règle spécifique pour aligner à gauche sur web */
+/* .module-details .details-container .back-btn {
+    align-self: flex-start;
+    margin-left: 0;
+    margin-right: auto;
+} */
+
+
 .back-btn:hover {
-    color: var(--dark);
-    transform: translateX(-5px);
+    background-color: var(--dark);
 }
 
 .back-btn i {
@@ -959,7 +658,7 @@ header h2 {
         margin: 0 var(--space-sm);
     }
     .modules-checkbox-grid {
-        grid-template-columns: 1fr; /* Une seule colonne sur petits écrans */
+        grid-template-columns: 1fr;
     }
     .submit-btn {
         width: 100%;
@@ -968,6 +667,12 @@ header h2 {
     }
     .module-card h3 {
         font-size: 1.3rem;
+    }
+    /* Centrer le bouton de retour sur mobile */
+    .module-details .details-container .back-btn {
+        align-self: center; /* Centre le bouton sur mobile */
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -996,16 +701,4 @@ header h2 {
         height: 10px;
         border-width: 0 2px 2px 0;
     }
-}
-
-
-/* Responsive */
-@media (max-width: 768px) {
-  .module-list {
-      grid-template-columns: 1fr;
-  }
-  
-  .welcome-content, #commentaires {
-      padding: 0 var(--space-md);
-  }
 }
