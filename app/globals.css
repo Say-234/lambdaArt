@@ -103,7 +103,7 @@ a:hover {
 
 img {
     max-width: 100%;
-    height: auto;
+    height: auto; /* Important pour les images responsives */
 }
 
 
@@ -554,26 +554,32 @@ header h2 {
     text-align: center;
 }
 
+/* NOUVEAUX STYLES POUR LA GALERIE MASONRY (Pinterest-like) */
 .module-details .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: var(--space-md);
+    display: block; /* Important pour que column-count fonctionne */
+    column-count: 3; /* 3 colonnes sur un écran large */
+    column-gap: var(--space-md); /* Espacement entre les colonnes */
     margin-top: var(--space-lg);
     margin-bottom: var(--space-xl);
-    justify-content: center; /* Centre les lignes de la grille */
-    align-items: flex-start; /* Aligne les éléments au début de leur axe transversal (utile si les hauteurs varient) */
+    padding: 0 var(--space-md); /* Un peu de padding pour éviter que les images ne touchent les bords */
+    max-width: 900px; /* Conserve ta largeur max pour le conteneur principal */
+    margin-left: auto; /* Centre le bloc de colonnes */
+    margin-right: auto; /* Centre le bloc de colonnes */
 }
 
 .module-details .gallery-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+    width: 100%; /* L'image prend 100% de la largeur de sa colonne */
+    height: auto; /* TRÈS IMPORTANT : Laisse la hauteur s'adapter naturellement */
+    display: block; /* Assure que l'image est un bloc */
+    margin-bottom: var(--space-md); /* Espacement VERTICAL entre les images dans une colonne */
+
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
-    aspect-ratio: 1 / 1;
-    display: block; /* S'assure que l'image est un bloc pour margin auto */
-    margin: 0 auto; /* Centre l'image dans sa cellule de grille */
+
+    /* Évite que l'image ne se brise en deux colonnes (peut ne pas être parfait dans tous les cas) */
+    break-inside: avoid-column;
+    page-break-inside: avoid; /* Pour la compatibilité générale */
 }
 
 .module-details .gallery-image:hover {
@@ -595,14 +601,6 @@ header h2 {
     border: none;
 }
 
-/* Le bouton de retour sera centré par align-items: center sur .details-container */
-/* Retire la règle spécifique pour aligner à gauche sur web */
-/* .module-details .details-container .back-btn {
-    align-self: flex-start;
-    margin-left: 0;
-    margin-right: auto;
-} */
-
 
 .back-btn:hover {
     background-color: var(--dark);
@@ -618,15 +616,21 @@ header h2 {
 /* ======================== */
 
 @media (max-width: 1024px) {
+    /* ... tes règles existantes ... */
     .logo {
         font-size: 2.5rem;
     }
     .welcome-content h2, .module-title, .form-title {
         font-size: 2.2rem;
     }
+    /* Règle spécifique pour la galerie sur les écrans moyens */
+    .module-details .gallery {
+        column-count: 2; /* 2 colonnes sur des tablettes ou écrans moyens */
+    }
 }
 
 @media (max-width: 768px) {
+    /* ... tes règles existantes ... */
     header {
         padding: var(--space-md) var(--space-sm);
     }
@@ -674,6 +678,11 @@ header h2 {
         margin-left: auto;
         margin-right: auto;
     }
+    /* Règle spécifique pour la galerie sur les petits écrans (mobiles) */
+    .module-details .gallery {
+        column-count: 1; /* 1 colonne sur les petits écrans */
+        padding: 0 var(--space-sm); /* Ajuste le padding sur mobile */
+    }
 }
 
 @media (max-width: 480px) {
@@ -701,4 +710,17 @@ header h2 {
         height: 10px;
         border-width: 0 2px 2px 0;
     }
+}
+
+footer {
+    background-color: var(--primary);
+    color: var(--white);
+    text-align: center;
+    padding: var(--space-lg) var(--space-md);
+    margin-top: var(--space-xl);
+    box-shadow: var(--shadow-sm);
+}
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
 }

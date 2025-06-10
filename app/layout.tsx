@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Formation Artisanale - Lambda Art',
-  description: 'Site de formation artisanale',
+  title: 'Lambda Art',
+  description: "L`Art de faire, à Portée de Main",
 };
 
 export default function RootLayout({
