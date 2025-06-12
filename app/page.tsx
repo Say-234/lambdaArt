@@ -258,8 +258,8 @@ export default function HomePage() {
       <section className="welcome-section">
         <div className="welcome-content">
           <h2>Bienvenue chez Lambda'Art</h2>
-          <p>Un espace de formation et d'expression dédié à toutes les formes de savoir-faire pratiques. De l’artisanat aux techniques manuelles, en passant par les activités créatives et techniques, nous vous offrons des ateliers accessibles, vivants et adaptés à tous les niveaux.<br />Que vous souhaitiez apprendre un métier de vos mains, découvrir une passion ou développer des compétences utiles et monétisables, Lambda’Art vous accompagne pas à pas dans un cadre convivial et motivant.</p>
-          <p>Rejoignez une communauté dynamique et bienveillante de passionnés, de curieux et de créateurs. Avec Lambda’Art, révélez votre potentiel et construisez un avenir concret grâce à vos talents pratiques. Des activités manuelles et créatives, aux réalisations artisanales en passant par des techniques avancées proches des métiers d'usine et de production, nous vous offrons...</p>
+          <p>Un espace de formation et d'expression dédié à toutes les formes de savoir-faire pratiques. Des activités manuelles et créatives, aux réalisations artisanales en passant par des techniques avancées proches des métiers d'usine et de production, nous vous offrons des ateliers accessibles, vivants et adaptés à tous les niveaux.<br />Que vous souhaitiez apprendre un métier de vos mains, découvrir une passion ou développer des compétences utiles et monétisables, Lambda’Art vous accompagne pas à pas dans un cadre convivial et motivant.</p>
+          <p>Rejoignez une communauté dynamique et bienveillante de passionnés, de curieux et de créateurs. Avec Lambda’Art, révélez votre potentiel et construisez votre estime personnelle grâce à vos talents pratiques.</p>
           {/* Le bouton "Je m'inscris" scrollera vers le formulaire */}
           <Link href="#inscription-form" onClick={scrollToRegistrationForm} className="cta-button">
             Je m'inscris
@@ -330,11 +330,21 @@ export default function HomePage() {
                   {/* Pays de l'UEMOA */}
                   <option value="+229">+229 (Bénin)</option>
                   <option value="+226">+226 (Burkina Faso)</option>
-                  <option value="+225">+225 (Côte d'Ivoire)</option>
+                  <option value="+238">+238 (Cap-Vert)</option>
+                  <option value="+225">+225 (Côte d&apos;Ivoire)</option>
+                  <option value="+220">+220 (Gambie)</option>
+                  <option value="+233">+233 (Ghana)</option>
+                  <option value="+224">+224 (Guinée)</option>
                   <option value="+224">+224 (Guinée-Bissau)</option>
+                  <option value="+241">+241 (Gabon)</option>
+                  <option value="+231">+231 (Liberia)</option>
                   <option value="+223">+223 (Mali)</option>
+                  <option value="+222">+222 (Mauritanie)</option>
                   <option value="+227">+227 (Niger)</option>
+                  <option value="+234">+234 (Nigeria)</option>
+                  <option value="+243">+243 (République Démocratique du Congo)</option>
                   <option value="+221">+221 (Sénégal)</option>
+                  <option value="+232">+232 (Sierra Leone)</option>
                   <option value="+228">+228 (Togo)</option>
 
                   {/* Quelques pays occidentaux */}
