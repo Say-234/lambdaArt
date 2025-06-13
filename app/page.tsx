@@ -327,7 +327,7 @@ export default function HomePage() {
                   className="form-input country-code-select" // Ajoute une classe personnalisée pour le style
                   title="Sélectionnez le code pays" // Fournit un nom accessible
                 >
-                  {/* Pays de l'UEMOA */}
+                  {/* Pays de l'Afrique de l'Ouest*/}
                   <option value="+229">+229 (Bénin)</option>
                   <option value="+226">+226 (Burkina Faso)</option>
                   <option value="+238">+238 (Cap-Vert)</option>
@@ -433,7 +433,7 @@ export default function HomePage() {
 
       <footer>
         <p>© {new Date().getFullYear()} Lambda'Art. Tous droits réservés.</p>
-        <p>Contacte : +229 01 53 72 74 79 / +229 01 94 57 74 57</p>
+        <p>Contacts : +229 01 53 72 74 79 / +229 01 94 57 74 57</p>
         <p>Email : lambdaart17@gmail.com</p>
       </footer>
 
