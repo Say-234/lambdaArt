@@ -2,7 +2,7 @@
 import Head from 'next/head';
 import RegistrationForm from './components/RegistrationForm';
 import ModulesList from './components/ModulesList';
-import WelcomeSection from './components/WelcomESection';
+import WelcomeSection from './components/WelcomeSection';
 import PageClient from './components/PageClient'; 
 import './globals.css';
 

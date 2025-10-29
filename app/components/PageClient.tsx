@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import WelcomeSection from './WelcomESection';
+import WelcomeSection from './WelcomeSection';
 import ModulesList from './ModulesList';
 import RegistrationForm from './RegistrationForm';
 
