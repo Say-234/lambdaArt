@@ -1,24 +1,37 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Your image domains configuration
+  // Image domains  // Images optimisées
   images: {
-    domains: ['res.cloudinary.com']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+    ],
+    formats: ['image/webp', 'image/avif'],
   },
 
-  // Turbopack configuration (no 'enabled' property as it's not supported)
+  // Turbopack configuration (moved from experimental.turbo)
   turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
+  // Suppression de la configuration webpack inutile avec Turbopack
+  webpack: null,
+
+  // Enable modern JavaScript features
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 
-  // Your Webpack custom rule
-  webpack: (config: any) => {
-    config.module.rules.push({
-      test: /\/vendor\/symfony\/translation\/Tests\/Fixtures\/.*\.ts$/,
-      loader: 'ignore-loader'
-    });
-    // Important: always return the config
-    return config;
-  }
+  // Output configuration for better performance
+  output: 'standalone',
+
 };
 
 export default nextConfig;
