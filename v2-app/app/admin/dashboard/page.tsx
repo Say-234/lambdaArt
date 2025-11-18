@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, addDoc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
-import { db, auth } from '@/lib/firebase';
+import { db, auth } from '../../../lib/firebase';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../hooks/useAuth';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
