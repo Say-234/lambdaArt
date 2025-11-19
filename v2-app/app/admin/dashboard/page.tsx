@@ -388,6 +388,11 @@ useEffect(() => {
 
   // Fonction pour créer un établissement
 const handleCreateEtablissement = async () => {
+  if (!user) {
+    alert('❌ Erreur: utilisateur non authentifié');
+    return;
+  }
+
   try {
     const etablissementData = {
       ...newEtablissement,
