@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { HeroHeader } from "../../components/hero-header"
 import { useContent } from "../hooks/useContent"
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
 interface Module {
   slug: string;
@@ -22,7 +23,7 @@ interface Etablissement {
   contact: string;
 }
 
-export default function InscriptionPage() {
+function InscriptionPageContent() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark')
   const { modules, whatsappNumber, loading } = useContent()
   const registrationFormRef = useRef<HTMLFormElement>(null);
@@ -573,5 +574,13 @@ export default function InscriptionPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function InscriptionPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InscriptionPageContent />
+    </Suspense>
   );
 }
