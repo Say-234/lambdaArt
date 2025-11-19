@@ -1,5 +1,4 @@
 // app/page.tsx
-import Head from 'next/head';
 import RegistrationForm from './components/RegistrationForm';
 import ModulesList from './components/ModulesList';
 import WelcomeSection from './components/WelcomeSection';
@@ -50,23 +49,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Head>
-        <title>Lambda'Art - L'Art de faire, à Portée de Main</title>
-        <meta name="description" content="Découvrez l'artisanat sous un nouveau jour avec nos formations pratiques et conviviales." />
-      </Head>
-
-      <header>
-        <h1 className="logo">Lambda'<span>Art</span></h1>
-        <h2>Imagination – Création – Découverte de soi</h2>
-      </header>
-
       <PageClient modulesData={modulesData} whatsappNumber={whatsappNumber} />
-
-      <footer>
-        <p> {new Date().getFullYear()} Lambda'Art. Tous droits réservés.</p>
-        <p>Contacts : +229 01 53 72 74 79 / +229 01 94 57 74 57</p>
-        <p>Email : lambdaart17@gmail.com</p>
-      </footer>
     </>
   );
 }

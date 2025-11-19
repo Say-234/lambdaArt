@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+  NOTE: Toutes les anciennes variables CSS et les classes personnalisées ont été migrées vers `tailwind.config.js`
+  et remplacées par des classes utilitaires Tailwind directement dans les composants .tsx.
+
+  Ce fichier ne contient plus que les imports de base et quelques styles globaux essentiels.
+*/
+
+body {
+    padding-top: 80px; /* Espace pour la barre de navigation fixe */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-y: scroll; 
+}

@@ -108,51 +108,55 @@ export default function RegistrationForm({ modulesData, whatsappNumber }: Regist
     }
   };
 
+  const inputStyles = "w-full p-3 border border-secondary rounded-md text-base text-dark bg-light placeholder-secondary/70 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white outline-none transition-all duration-300";
+
   return (
-    <section id="inscription-form" className="form-section animated-section">
-      <div className="form-container">
-        <h2 className="form-title">Inscription / Contact</h2>
-        <p className="form-description">
+    <section id="inscription-form" className="bg-accent py-xl px-md">
+      <div className="max-w-4xl mx-auto bg-white p-xl rounded-lg shadow-lg">
+        <h2 className="font-title text-primary text-4xl text-center mb-md">Inscription / Contact</h2>
+        <p className="text-dark text-lg text-center mb-lg leading-relaxed">
           Veuillez remplir le formulaire ci-dessous pour vous inscrire à une formation ou nous laisser un message. Nous vous contacterons très prochainement !
         </p>
-        <form onSubmit={handleRegistrationSubmit} className="registration-form" ref={registrationFormRef}>
-          <div className="form-group">
-            <label htmlFor="nom">Nom :</label>
-            <input
-              type="text"
-              id="nom"
-              name="nom"
-              value={registrationForm.nom}
-              onChange={handleRegistrationChange}
-              required
-              placeholder="Votre nom"
-              className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="prenom">Prénom :</label>
-            <input
-              type="text"
-              id="prenom"
-              name="prenom"
-              value={registrationForm.prenom}
-              onChange={handleRegistrationChange}
-              required
-              placeholder="Votre prénom"
-              className="form-input"
-            />
+        <form onSubmit={handleRegistrationSubmit} className="grid gap-lg text-left" ref={registrationFormRef}>
+          <div className="grid md:grid-cols-2 gap-lg">
+            <div>
+              <label htmlFor="nom" className="block mb-xs font-semibold text-dark">Nom :</label>
+              <input
+                type="text"
+                id="nom"
+                name="nom"
+                value={registrationForm.nom}
+                onChange={handleRegistrationChange}
+                required
+                placeholder="Votre nom"
+                className={inputStyles}
+              />
+            </div>
+            <div>
+              <label htmlFor="prenom" className="block mb-xs font-semibold text-dark">Prénom :</label>
+              <input
+                type="text"
+                id="prenom"
+                name="prenom"
+                value={registrationForm.prenom}
+                onChange={handleRegistrationChange}
+                required
+                placeholder="Votre prénom"
+                className={inputStyles}
+              />
+            </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="contact">Contact (Numéro WhatsApp) :</label>
-            <div className="contact-input-row">
+          <div>
+            <label htmlFor="contact" className="block mb-xs font-semibold text-dark">Contact (Numéro WhatsApp) :</label>
+            <div className="flex items-center gap-2">
               <select
                 id="countryCode"
                 name="countryCode"
                 value={registrationForm.countryCode}
                 onChange={handleRegistrationChange}
                 required
-                className="form-input country-code-select"
+                className={`${inputStyles} w-1/3`}
                 title="Sélectionnez le code pays"
               >
                 <option value="+229">+229 (Bénin)</option>
@@ -191,7 +195,7 @@ export default function RegistrationForm({ modulesData, whatsappNumber }: Regist
                     ? 'Ex: 01 suivi de 8 chiffres'
                     : (registrationForm.countryCode === '+33' ? 'Ex: 9 chiffres' : 'Votre numéro local')
                 }
-                className="form-input"
+                className={`${inputStyles} w-2/3`}
                 maxLength={registrationForm.countryCode === '+229' ? 10 : (registrationForm.countryCode === '+33' ? 9 : undefined)}
                 pattern={registrationForm.countryCode === '+229' ? '[0-9]{8}' : (registrationForm.countryCode === '+33' ? '[0-9]{9}' : undefined)}
                 title={
@@ -203,21 +207,25 @@ export default function RegistrationForm({ modulesData, whatsappNumber }: Regist
             </div>
           </div>
 
-          <div className="form-group">
-            <label className="modules-label">Modules souhaités (Sélectionnez un ou plusieurs) :</label>
-            <div className="modules-checkbox-grid">
+          <div>
+            <label className="block mb-md font-semibold text-dark">Modules souhaités (Sélectionnez un ou plusieurs) :</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-md bg-light p-md rounded-md border border-secondary">
               {modulesData.length > 0 ? (
                 modulesData.map((module) => (
-                  <label key={module.slug} className="checkbox-item">
+                  <label key={module.slug} className="flex items-center cursor-pointer text-dark select-none">
                     <input
                       type="checkbox"
                       value={module.slug}
                       checked={registrationForm.modulesSouhaites.includes(module.slug)}
                       onChange={handleModuleSelection}
-                      className="checkbox-input"
+                      className="sr-only peer"
                     />
-                    <span className="checkbox-custom"></span>
-                    <span className="checkbox-text">{module.title}</span>
+                    <span className="w-6 h-6 bg-white border-2 border-secondary rounded-sm mr-3 flex-shrink-0 peer-checked:bg-primary peer-checked:border-primary transition-all duration-300 relative">
+                      <svg className="w-4 h-4 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden peer-checked:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4">
+                        <path d="M20 6L9 17l-5-5"></path>
+                      </svg>
+                    </span>
+                    <span>{module.title}</span>
                   </label>
                 ))
               ) : (
@@ -226,8 +234,8 @@ export default function RegistrationForm({ modulesData, whatsappNumber }: Regist
             </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="message">Votre message (optionnel) :</label>
+          <div>
+            <label htmlFor="message" className="block mb-xs font-semibold text-dark">Votre message (optionnel) :</label>
             <textarea
               id="message"
               name="message"
@@ -235,17 +243,17 @@ export default function RegistrationForm({ modulesData, whatsappNumber }: Regist
               value={registrationForm.message}
               onChange={handleRegistrationChange}
               placeholder="Des questions spécifiques ? Laissez votre message ici."
-              className="form-textarea"
+              className={inputStyles}
             ></textarea>
           </div>
 
           {registrationSubmitMessage && (
-            <p className={`submit-message ${registrationSubmitMessage.includes('Erreur') ? 'error' : ''}`}>
+            <p className={`p-md rounded-md font-medium text-center ${registrationSubmitMessage.includes('Erreur') ? 'bg-red-100 text-red-700 border border-red-700' : 'bg-green-100 text-green-700 border border-green-700'}`}>
               {registrationSubmitMessage}
             </p>
           )}
 
-          <button type="submit" className="submit-btn" disabled={isSubmittingRegistration}>
+          <button type="submit" className="bg-primary text-white py-3 px-5 rounded-md text-lg font-bold cursor-pointer transition-all duration-300 shadow-md hover:bg-dark hover:-translate-y-1 hover:shadow-lg disabled:bg-secondary disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none" disabled={isSubmittingRegistration}>
             {isSubmittingRegistration ? 'Envoi en cours...' : 'Envoyer ma demande'}
           </button>
         </form>

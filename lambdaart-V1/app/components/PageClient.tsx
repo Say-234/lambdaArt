@@ -50,7 +50,7 @@ export default function PageClient({ modulesData, whatsappNumber }: PageClientPr
     <main>
       <WelcomeSection scrollToRegistrationForm={scrollToRegistrationForm} />
 
-      <h2 className="module-title" ref={modulesSectionRef}>Nos Modules de Formation</h2>
+      <h2 className="text-3xl font-title text-primary text-center my-lg" ref={modulesSectionRef}>Nos Modules de Formation</h2>
       <ModulesList modulesData={modulesData} />
 
       <RegistrationForm modulesData={modulesData} whatsappNumber={whatsappNumber} />
