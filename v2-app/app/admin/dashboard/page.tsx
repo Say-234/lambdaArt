@@ -32,7 +32,10 @@ import {
   FiCheck,
   FiClock,
   FiHelpCircle,
-  FiStar
+  FiStar,
+  FiMail,
+  FiPhone,
+  FiMapPin
 } from 'react-icons/fi';
 
 // Types basés sur votre structure Firebase
@@ -88,7 +91,9 @@ interface Etablissement {
   contact: string;
   ville: string;
   statut: string;
+  responsable?: string;
   dateCreation: any;
+  invitationId?: string;
 }
 
 // Palette de couleurs Lambda'Art
@@ -167,6 +172,7 @@ export default function SuperAdminDashboard() {
   const [contentSections, setContentSections] = useState<ContentSection[]>([]);
   const [modules, setModules] = useState<Module[]>([]);
   const [etablissements, setEtablissements] = useState<Etablissement[]>([]);
+  const [etablissementsStats, setEtablissementsStats] = useState<any>({});
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   
@@ -182,6 +188,37 @@ export default function SuperAdminDashboard() {
   const { user } = useAuth();
   const router = useRouter();
   const colors = themeColors[theme];
+
+  // Dans les états, ajoutez :
+const [showCreateEtablissement, setShowCreateEtablissement] = useState(false);
+const [newEtablissement, setNewEtablissement] = useState({
+  nom: '',
+  email: '',
+  contact: '',
+  ville: '',
+  responsable: ''
+});
+
+useEffect(() => {
+  const calculateStats = async () => {
+    const stats: any = {};
+    const inscriptionsSnap = await getDocs(collection(db, 'inscriptions'));
+    inscriptionsSnap.forEach(inscriptionDoc => {
+      const inscription = inscriptionDoc.data();
+      if (inscription.etablissementId) {
+        if (!stats[inscription.etablissementId]) {
+          stats[inscription.etablissementId] = { totalApprenants: 0 };
+        }
+        stats[inscription.etablissementId].totalApprenants++;
+      }
+    });
+    setEtablissementsStats(stats);
+  };
+
+  if (etablissements.length > 0) {
+    calculateStats();
+  }
+}, [etablissements]);
 
   // Gestion du thème
   useEffect(() => {
@@ -348,6 +385,55 @@ export default function SuperAdminDashboard() {
       console.error('❌ Erreur établissements:', error);
     }
   };
+
+  // Fonction pour créer un établissement
+const handleCreateEtablissement = async () => {
+  try {
+    const etablissementData = {
+      ...newEtablissement,
+      statut: 'actif',
+      dateCreation: new Date(),
+      createdBy: user.uid,
+      // Générer un ID unique pour le lien d'inscription
+      invitationId: `ETAB-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+    };
+
+    const docRef = await addDoc(collection(db, 'etablissements'), etablissementData);
+    
+    // Générer le lien d'invitation
+    const invitationLink = `${window.location.origin}/admin/etablissement/inscription?token=${etablissementData.invitationId}`;
+    
+    // Réinitialiser le formulaire
+    setNewEtablissement({
+      nom: '',
+      email: '',
+      contact: '',
+      ville: '',
+      responsable: ''
+    });
+    setShowCreateEtablissement(false);
+    
+    // Afficher le lien d'invitation
+    alert(`✅ Établissement créé !\n\nLien d'invitation : ${invitationLink}\n\nCopiez ce lien et envoyez-le à l'établissement.`);
+    
+    await loadEtablissements();
+    await loadStats();
+    
+  } catch (error) {
+    alert('❌ Erreur création établissement');
+    console.error(error);
+  }
+};
+
+const generateInvitationLink = (etabId: string) => {
+  const etab = etablissements.find(e => e.id === etabId);
+  if (etab && etab.invitationId) {
+    const invitationLink = `${window.location.origin}/admin/etablissement/inscription?token=${etab.invitationId}`;
+    alert(`Lien d'invitation pour ${etab.nom}:\n\n${invitationLink}`);
+  } else {
+    alert("Impossible de générer le lien : token d'invitation non trouvé.");
+  }
+};
 
   const loadFAQs = async () => {
     console.log('❓ Chargement des FAQs...');
@@ -1608,32 +1694,88 @@ export default function SuperAdminDashboard() {
     exit={{ opacity: 0, x: -20 }}
     className="space-y-6"
   >
-    <div>
-      <h2 className={`text-2xl font-bold ${colors.text.primary}`}>
-        Gestion des Établissements
-      </h2>
-      <p className={colors.text.secondary}>
-        {etablissements.length} établissement(s) partenaire(s)
-      </p>
+    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div>
+        <h2 className={`text-2xl font-bold ${colors.text.primary}`}>
+          Gestion des Établissements
+        </h2>
+        <p className={colors.text.secondary}>
+          {etablissements.length} établissement(s) partenaire(s)
+        </p>
+      </div>
+      <button 
+        onClick={() => setShowCreateEtablissement(true)}
+        className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold ${colors.button.primary} self-start`}
+      >
+        <FiPlus />
+        Créer un établissement
+      </button>
     </div>
 
+    {/* Cartes des établissements */}
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
       {etablissements.map((etab) => (
-        <div key={etab.id} className={`${colors.card} rounded-xl p-6`}>
-          <h3 className={`text-lg font-semibold mb-2 ${colors.text.primary}`}>
-            {etab.nom}
-          </h3>
-          <p className={colors.text.secondary}>{etab.email}</p>
-          <p className={colors.text.secondary}>{etab.contact}</p>
-          <p className={colors.text.secondary}>{etab.ville}</p>
-          <div className={`mt-3 inline-flex px-3 py-1 rounded-full text-xs font-medium ${
-            etab.statut === 'actif' 
-              ? 'bg-green-100 text-green-800' 
-              : 'bg-red-100 text-red-800'
-          }`}>
-            {etab.statut}
+        <motion.div
+          key={etab.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`${colors.card} rounded-xl p-6`}
+        >
+          <div className="flex justify-between items-start mb-4">
+            <h3 className={`text-lg font-semibold ${colors.text.primary}`}>
+              {etab.nom}
+            </h3>
+            <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+              etab.statut === 'actif' 
+                ? 'bg-green-100 text-green-800' 
+                : 'bg-red-100 text-red-800'
+            }`}>
+              {etab.statut}
+            </div>
           </div>
-        </div>
+          
+          <div className="space-y-2 mb-4">
+            <p className={`flex items-center gap-2 ${colors.text.secondary}`}>
+              <FiUsers size={14} />
+              {etab.responsable || 'Non spécifié'}
+            </p>
+            <p className={`flex items-center gap-2 ${colors.text.secondary}`}>
+              <FiMail size={14} />
+              {etab.email}
+            </p>
+            <p className={`flex items-center gap-2 ${colors.text.secondary}`}>
+              <FiPhone size={14} />
+              {etab.contact}
+            </p>
+            <p className={`flex items-center gap-2 ${colors.text.secondary}`}>
+              <FiMapPin size={14} />
+              {etab.ville}
+            </p>
+          </div>
+
+          {/* Statistiques rapides */}
+          <div className={`border-t pt-3 ${theme === 'dark' ? 'border-[#3E4C22]' : 'border-[#D4B483]'}`}>
+            <div className="flex justify-between text-sm">
+              <span className={colors.text.secondary}>Apprenants:</span>
+              <span className={`font-semibold ${colors.text.accent}`}>
+                {/* À calculer depuis les inscriptions */}
+                {etablissementsStats[etab.id]?.totalApprenants || 0}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex gap-2 mt-4">
+            <button
+              onClick={() => generateInvitationLink(etab.id)}
+              className={`flex-1 px-3 py-2 rounded-lg ${colors.button.secondary} text-sm`}
+            >
+              Lien d'invitation
+            </button>
+            <button className={`p-2 rounded-lg ${colors.button.danger}`}>
+              <FiTrash2 size={14} />
+            </button>
+          </div>
+        </motion.div>
       ))}
     </div>
 
@@ -1641,11 +1783,122 @@ export default function SuperAdminDashboard() {
       <div className={`${colors.card} rounded-xl p-8 text-center`}>
         <FiUsers className={`text-4xl mx-auto mb-4 ${colors.text.secondary}`} />
         <p className={colors.text.secondary}>Aucun établissement créé</p>
-        <button className={`mt-4 px-6 py-2 rounded-lg ${colors.button.primary}`}>
+        <p className={`text-sm ${colors.text.secondary} mt-2`}>
+          Créez votre premier établissement pour commencer à gérer vos partenaires.
+        </p>
+        <button 
+          onClick={() => setShowCreateEtablissement(true)}
+          className={`mt-4 px-6 py-2 rounded-lg ${colors.button.primary}`}
+        >
           + Créer le premier établissement
         </button>
       </div>
     )}
+
+    {/* Modal Création Établissement */}
+    <AnimatePresence>
+      {showCreateEtablissement && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+        >
+          <div className={`rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-auto ${colors.card}`}>
+            <h3 className={`text-xl font-bold mb-4 ${colors.text.primary}`}>
+              Créer un nouvel établissement
+            </h3>
+            
+            <div className="space-y-4">
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${colors.text.primary}`}>
+                  Nom de l'établissement *
+                </label>
+                <input
+                  type="text"
+                  value={newEtablissement.nom}
+                  onChange={(e) => setNewEtablissement(prev => ({...prev, nom: e.target.value}))}
+                  className={`w-full p-3 rounded-lg ${colors.input}`}
+                  placeholder="Ex: Lycée Technique de Cotonou"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${colors.text.primary}`}>
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    value={newEtablissement.email}
+                    onChange={(e) => setNewEtablissement(prev => ({...prev, email: e.target.value}))}
+                    className={`w-full p-3 rounded-lg ${colors.input}`}
+                    placeholder="contact@etablissement.com"
+                  />
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${colors.text.primary}`}>
+                    Téléphone *
+                  </label>
+                  <input
+                    type="text"
+                    value={newEtablissement.contact}
+                    onChange={(e) => setNewEtablissement(prev => ({...prev, contact: e.target.value}))}
+                    className={`w-full p-3 rounded-lg ${colors.input}`}
+                    placeholder="+229 XX XX XX XX"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${colors.text.primary}`}>
+                    Ville *
+                  </label>
+                  <input
+                    type="text"
+                    value={newEtablissement.ville}
+                    onChange={(e) => setNewEtablissement(prev => ({...prev, ville: e.target.value}))}
+                    className={`w-full p-3 rounded-lg ${colors.input}`}
+                    placeholder="Cotonou"
+                  />
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${colors.text.primary}`}>
+                    Responsable
+                  </label>
+                  <input
+                    type="text"
+                    value={newEtablissement.responsable}
+                    onChange={(e) => setNewEtablissement(prev => ({...prev, responsable: e.target.value}))}
+                    className={`w-full p-3 rounded-lg ${colors.input}`}
+                    placeholder="Nom du responsable"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-2 flex-wrap mt-6">
+              <button
+                onClick={handleCreateEtablissement}
+                disabled={!newEtablissement.nom || !newEtablissement.email || !newEtablissement.contact}
+                className={`px-4 py-2 rounded-lg ${colors.button.primary} disabled:opacity-50`}
+              >
+                Créer et générer le lien
+              </button>
+              <button
+                onClick={() => setShowCreateEtablissement(false)}
+                className={`px-4 py-2 rounded-lg ${colors.button.secondary}`}
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   </motion.div>
 )}
 

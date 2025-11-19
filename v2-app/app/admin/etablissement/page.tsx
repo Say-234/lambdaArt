@@ -26,12 +26,20 @@ export default function DashboardEtablissement() {
     inscriptionsMois: 0
   });
 
+  const [statistiquesDetaillees, setStatistiquesDetaillees] = useState({
+    totalEtudiants: 0,
+    inscriptionsMois: 0,
+    inscriptionsSemaine: 0,
+    modulesPopulaires: [] as string[]
+  });
+
   // Récupérer l'ID de l'établissement depuis les claims ou une collection séparée
   const etablissementId = (user as any)?.etablissementId;
 
   useEffect(() => {
     if (etablissementId) {
       chargerEtudiants();
+      chargerStatistiquesDetaillees();
     }
   }, [etablissementId]);
 
@@ -47,7 +55,6 @@ export default function DashboardEtablissement() {
       ...doc.data()
     } as Etudiant));
     
-    setEtudiants(etudiantsData);
     setStatistiques({
       totalEtudiants: etudiantsData.length,
       inscriptionsMois: etudiantsData.filter(etud => {
@@ -56,6 +63,48 @@ export default function DashboardEtablissement() {
         return dateInscription.getMonth() === now.getMonth() && 
                dateInscription.getFullYear() === now.getFullYear();
       }).length
+    });
+  };
+
+  // Charger les statistiques détaillées
+  const chargerStatistiquesDetaillees = async () => {
+    if (!etablissementId) return;
+
+    const inscriptionsRef = collection(db, 'inscriptions');
+    const q = query(inscriptionsRef, where('etablissementId', '==', etablissementId));
+    const querySnapshot = await getDocs(q);
+    
+    const etudiantsData: Etudiant[] = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as Etudiant));
+
+    const maintenant = new Date();
+    const debutMois = new Date(maintenant.getFullYear(), maintenant.getMonth(), 1);
+    const debutSemaine = new Date(maintenant.setDate(maintenant.getDate() - maintenant.getDay()));
+
+    // Calcul des modules populaires
+    const modulesCount: { [key: string]: number } = {};
+    etudiantsData.forEach(etud => {
+      etud.modules.forEach(module => {
+        modulesCount[module] = (modulesCount[module] || 0) + 1;
+      });
+    });
+
+    const modulesPopulaires = Object.entries(modulesCount)
+      .sort(([,a], [,b]) => b - a)
+      .slice(0, 3)
+      .map(([module]) => module);
+
+    setStatistiquesDetaillees({
+      totalEtudiants: etudiantsData.length,
+      inscriptionsMois: etudiantsData.filter(etud => 
+        new Date(etud.dateInscription) >= debutMois
+      ).length,
+      inscriptionsSemaine: etudiantsData.filter(etud => 
+        new Date(etud.dateInscription) >= debutSemaine
+      ).length,
+      modulesPopulaires
     });
   };
 
