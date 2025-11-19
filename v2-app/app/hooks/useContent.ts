@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { 
-  ContentSection, 
-  Module, 
-  FAQ,
-  Testimonial,
   getContentSections, 
   getModules, 
   getTestimonials, 
   getWhatsappNumber,
   getFAQs
+} from '../services/contentService';
+import type { 
+  ContentSection, 
+  Module, 
+  FAQ,
+  Testimonial
 } from '../services/contentService';
 
 export const useContent = () => {
