@@ -1,0 +1,11 @@
+# Dossiers globaux à ignorer dans les sous-dossiers
+/lambdaart-V1/.next
+/lambdaart-V1/node_modules
+/v2-app/.next
+/v2-app/node_modules
+
+# Autres fichiers à ignorer
+.env*
+.vercel
+*.tsbuildinfo
+npm-debug.log*
