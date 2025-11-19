@@ -4,8 +4,8 @@
 import { useState, useEffect } from 'react';
 import { User as FirebaseUser } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '@/lib/firebase';
-import { User } from '@/types/user';
+import { auth, db } from '../../lib/firebase';
+import { User } from '../../types/user';
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);

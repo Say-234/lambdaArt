@@ -1,9 +1,9 @@
 // app/modules/page.tsx
 'use client'
 import { motion } from "framer-motion"
-import { HeroHeader } from "@/components/hero-header"
-import { SafeImage } from "@/components/SafeImage"
-import { useContent } from "@/app/hooks/useContent"
+import { HeroHeader } from "../../components/hero-header"
+import { SafeImage } from "../../components/SafeImage"
+import { useContent } from "../../app/hooks/useContent"
 import { useEffect, useState, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"

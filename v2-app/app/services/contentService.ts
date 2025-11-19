@@ -1,6 +1,5 @@
 import { doc, getDoc, collection, getDocs, query, where, orderBy, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
-import { FAQ, Testimonial } from '@/types/faq';
+import { db } from '../../lib/firebase';
 
 // Check if Firebase is properly configured
 const isMockMode = !process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 
@@ -34,6 +33,32 @@ export interface Module {
   containerColor?: string;
   createdAt?: any;
   updatedAt?: any;
+}
+
+export interface FAQ {
+  id: string;
+  question: string;
+  answer: string;
+  category: string;
+  order: number;
+  isActive: boolean;
+  createdAt: any;
+  updatedAt: any;
+}
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  email: string;
+  title: string;
+  quote: string;
+  rating: number;
+  isApproved: boolean;
+  moduleId?: string;
+  moduleName?: string;
+  createdAt: any;
+  updatedAt?: any;
+  expiresAt?: any; // Pour la suppression automatique après 15 jours
 }
 
 // Fonction pour calculer le prix total

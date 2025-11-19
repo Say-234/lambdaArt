@@ -1,9 +1,9 @@
 'use client'
 import Link from 'next/link'
 import { Menu, X, Sun, Moon, Sparkles } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '../components/ui/button'
 import React from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '../lib/utils'
 
 
 

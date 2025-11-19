@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useContent } from "../hooks/useContent";
 import Link from "next/link";
 import { useState } from "react";
-import { HeroHeader } from "@/components/hero-header";
+import { HeroHeader } from "../../components/hero-header";
 import { FiChevronDown, FiChevronUp, FiMessageCircle, FiHelpCircle, FiStar } from "react-icons/fi";
 
 export default function FAQPage() {

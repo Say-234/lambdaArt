@@ -3,10 +3,10 @@
 
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from '@/lib/firebase';
+import { auth, db } from '../../lib/firebase';
 import { useRouter } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
-import { HeroHeader } from '@/components/hero-header';
+import { HeroHeader } from '../../components/hero-header';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');

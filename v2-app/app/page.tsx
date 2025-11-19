@@ -5,7 +5,7 @@ import { InfiniteMovingCards } from "../components/ui/infinite-moving-cards"
 import React from "react"
 import { useContent } from "./hooks/useContent"
 import Link from "next/link"
-import { ModulesSection } from "@/components/ModulesSection"
+import { ModulesSection } from "../components/ModulesSection"
 
 
 

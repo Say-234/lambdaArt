@@ -6,10 +6,10 @@ import { signOut } from 'firebase/auth';
 import { db, auth } from '../../../lib/firebase';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../hooks/useAuth';
-import { AdminSidebar } from '@/components/admin/AdminSidebar';
+import { AdminSidebar } from '../../../components/admin/AdminSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
-import ModuleForm from '@/components/admin/ModuleForm';
-import { FAQ, Testimonial } from '@/types/faq';
+import ModuleForm from '../../../components/admin/ModuleForm';
+import { FAQ, Testimonial } from '../../../types/faq';
 import { getFAQs, saveFAQ, deleteFAQ, getTestimonials, saveTestimonial, approveTestimonial, deleteTestimonial } from '@/app/services/contentService';
 import { 
   FiHome, 

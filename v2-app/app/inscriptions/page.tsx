@@ -3,7 +3,7 @@
 
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { motion } from "framer-motion"
-import { HeroHeader } from "@/components/hero-header"
+import { HeroHeader } from "../../components/hero-header"
 import { useContent } from "../hooks/useContent"
 import { useSearchParams } from 'next/navigation'
 

@@ -2,7 +2,7 @@
 'use client'
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { useContent } from "@/app/hooks/useContent"
+import { useContent } from "../app/hooks/useContent"
 import { SafeImage } from "./SafeImage"
 
 export const ModulesSection = ({ theme }: { theme: 'light' | 'dark' }) => {
