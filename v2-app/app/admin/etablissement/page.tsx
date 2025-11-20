@@ -2,9 +2,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { collection, query, where, getDocs, DocumentData } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { db } from '../../../lib/firebase';
 import { useAuth } from '../../hooks/useAuth';
-import { EtablissementSidebar } from '@/components/admin/EtablissementSidebar';
+import { EtablissementSidebar } from '../../../components/admin/EtablissementSidebar';
 
 interface Etudiant {
   id: string;

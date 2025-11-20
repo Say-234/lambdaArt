@@ -1,5 +1,5 @@
-// app/inscription/page.tsx
 'use client';
+// app/inscription/page.tsx
 
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { motion } from "framer-motion"
